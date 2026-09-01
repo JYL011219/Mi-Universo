@@ -300,6 +300,11 @@
 </head>
 <body oncontextmenu="return false;">
 
+    <!-- REPRODUCTOR DE AUDIO LOCAL DESDE GITHUB -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="musica.mp3" type="audio/mp3">
+    </audio>
+
     <canvas id="starfield-canvas"></canvas>
     
     <canvas id="explosion-canvas"></canvas>
@@ -474,6 +479,14 @@
         resizeStarfield();
         drawStarfield();
 
+        function playSoftMusic() {
+            const music = document.getElementById('bg-music');
+            if (music) {
+                music.volume = 0.25; // Tono suave (25% de volumen)
+                music.play().catch(e => console.log("Reproducción automática bloqueada:", e));
+            }
+        }
+
         function loadProtectedImages() {
             document.getElementById('img1').src = img1Source;
             document.getElementById('img2').src = img2Source;
@@ -513,6 +526,7 @@
 
         function checkPin() {
             if (currentPin === CORRECT_PIN) {
+                playSoftMusic(); // Inicia la música suavemente al escribir el PIN
                 triggerGalaxyExplosion(() => {
                     loadProtectedImages();
                     showScreen('main-screen');
@@ -631,7 +645,7 @@
         }
 
         /* TEXTO DE LA CARTA PERSONALIZADO Y CON EMOJIS */
-        const letterText = "Amor de mi Vida,\n\nGracias por ser el refugio de mi vida, por cada instante, cada risa y hasta por los silencios que hemos compartido. 🫂✨\n\nEres el núcleo de mi universo. Quiero que sepas que hoy y siempre serás mi lugar favorito en el mundo. 🌌✨ Quiero que sigamos construyendo nuestro hogar pasito a pasito y eso sí, siempre de la mano de Dios. 🙏🏼🏡✨\n\nHoy celebro por un mes más, por todo lo que hemos vivido en esta vida y por todas las vidas que nos faltan. 🥂❤️\n\nTe Amooo Infinitamente ❤️♾️\n\n#01 L&J 🤍\n¡CÓMPLICES! 🔐✨";
+        const letterText = "Amor de mi Vida,\n\nGracias por ser el refugio de mi vida, por cada instante, cada risa y hasta por los silencios que hemos compartido. 💖✨\n\nEres el núcleo de mi universo. 🌌🪐 Quiero que sepas que hoy y siempre serás mi lugar favorito en el mundo. 🌎❤️\n\nQuiero que sigamos construyendo nuestro hogar pasito a pasito 🏡🚶‍♂️🚶‍♀️ y eso sí, siempre de la mano de Dios. 🙏🏼✨\n\nHoy celebro por un mes más, por todo lo que hemos vivido en esta vida y por todas las vidas que nos faltan. 🥂✨💫\n\nTe Amooo Infinitamente ❤️♾️\n\n#01 L&J 🤍\n¡CÓMPLICES! 🔐✨";
 
         function typeLetter() {
             let index = 0;
